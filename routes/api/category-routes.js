@@ -44,13 +44,13 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-  Category.update(req.body, {
+  Category.update(req.body, { 
     where: {
       id: req.params.id,
     },
   })
     .then((newCategory) => {
-      // find all associated tags from ProductTag
+      
      res.json(newCategory)
     })
 });
