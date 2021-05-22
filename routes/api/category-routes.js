@@ -44,11 +44,20 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-  // update a category by its `id` value
+  Category.update(req.body, {
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((newCategory) => {
+      // find all associated tags from ProductTag
+     res.json(newCategory)
+    })
 });
 
 router.delete('/:id', async (req, res) => {
   // delete a category by its `id` value
+  /*
 try{
   const delCat = await Category.destroy({
     where:{
@@ -63,6 +72,14 @@ try{
 } catch(err){
   res.status(500).json(err);
 }
+*/
+Category.destroy({
+  where:{
+    id:req.params.id,
+  },
+}).then((cat) => {
+  res.json(cat)
+});
 
 });
 
